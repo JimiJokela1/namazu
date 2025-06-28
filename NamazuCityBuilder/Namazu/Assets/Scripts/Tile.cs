@@ -3,8 +3,12 @@ using UnityEngine.EventSystems;
 
 public class Tile : MonoBehaviour, IPointerDownHandler
 {
+    public Building currentBuildingObject = null;
     public BuildingType TileBuilding;
     public TileType TileType;
+
+    public Vector2Int positionOnGrid;
+    public bool shuffled = false; //Used for the catfish
 
     public void OnPointerDown(PointerEventData eventData)
     {
@@ -16,7 +20,7 @@ public class Tile : MonoBehaviour, IPointerDownHandler
             if (GameManager.Instance.CanAffordResourceCost(GameManager.Instance.SelectedBuildingType.BuildingCosts)
                 && TileType != TileType.Blocked)
             {
-                if (GameManager.Instance.SelectedBuildingType.RequiredTileType != TileType 
+                if (GameManager.Instance.SelectedBuildingType.RequiredTileType != TileType
                     && GameManager.Instance.SelectedBuildingType.RequiredTileType != TileType.Any)
                 {
                     Debug.Log("Can't build on that tile.");
@@ -34,6 +38,15 @@ public class Tile : MonoBehaviour, IPointerDownHandler
             {
                 Debug.Log("Can't afford building");
             }
+        }
+    }
+
+    public void RepositionBuilding()
+    {
+        if (currentBuildingObject != null)
+        {
+            currentBuildingObject.transform.position = transform.position;
+            currentBuildingObject.transform.position += Vector3.up;
         }
     }
 }
