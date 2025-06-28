@@ -14,10 +14,21 @@ public class Tile : MonoBehaviour, IPointerDownHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         if (TileBuilding != null)
-            return;
-
-        if (GameManager.Instance.SelectedBuildingType != null)
         {
+            print("aksfhnoainfoasncfosa");
+            if (GameManager.Instance.SelectedBuildingType.Deconstruct)
+            {
+                print("aksfhnoainfoasncfosa");
+                DeconstructBuilding();
+            }
+            return;
+        }
+
+
+
+        if (GameManager.Instance.SelectedBuildingType != null && !GameManager.Instance.SelectedBuildingType.Deconstruct)
+        {
+
             if (GameManager.Instance.CanAffordResourceCost(GameManager.Instance.SelectedBuildingType.BuildingCosts)
                 && TileType != TileType.Blocked)
             {

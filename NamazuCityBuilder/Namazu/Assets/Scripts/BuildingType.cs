@@ -18,6 +18,8 @@ public class BuildingType : ScriptableObject
 
     public string Description;
 
+    public bool Deconstruct = false;
+
     public Sprite BuildingSprite;
 }
 

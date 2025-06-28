@@ -198,7 +198,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-         // Generate scenery
+        // Generate scenery
         for (int y = 0; y < TileCountY; y++)
         {
             for (int x = 0; x < TileCountX; x++)
@@ -308,7 +308,7 @@ public class GameManager : MonoBehaviour
                                 }
                             }
                         }
-                        
+
                         if (!hasPower)
                         {
                             Debug.Log("Building doesn't have power!");
@@ -414,6 +414,14 @@ public class GameManager : MonoBehaviour
         AudioSource.PlayClipAtPoint(ButtonAudio, Vector3.zero);
     }
 
+    public void SelectDeconstruct()
+    {
+        SelectedBuildingType = BuildingTypes.Find(b => b.name == "Demolisher");
+        UIManager.Instance.UpdateCostText(SelectedBuildingType.BuildingCosts);
+        print("Decoinasocnaodvbosdv");
+        AudioSource.PlayClipAtPoint(ButtonAudio, Vector3.zero);
+    }
+
     public List<Building> GetNeighbouringBuildings(Tile tile)
     {
         List<Building> buildings = new List<Building>();
@@ -429,7 +437,7 @@ public class GameManager : MonoBehaviour
 
                 if (Tiles[x, y].TileBuilding != null)
                 {
-                    buildings.Add(Tiles[x,y].currentBuildingObject);
+                    buildings.Add(Tiles[x, y].currentBuildingObject);
                 }
             }
         }
