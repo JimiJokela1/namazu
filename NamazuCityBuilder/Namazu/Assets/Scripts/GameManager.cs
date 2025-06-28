@@ -426,9 +426,9 @@ public class GameManager : MonoBehaviour
     {
         List<Building> buildings = new List<Building>();
 
-        for (int y = tile.positionOnGrid.y - 1; y < tile.positionOnGrid.y + 1; y++)
+        for (int y = tile.positionOnGrid.y - 1; y <= tile.positionOnGrid.y + 1; y++)
         {
-            for (int x = tile.positionOnGrid.x - 1; x < tile.positionOnGrid.x + 1; x++)
+            for (int x = tile.positionOnGrid.x - 1; x <= tile.positionOnGrid.x + 1; x++)
             {
                 if (x < 0 || x >= TileCountX)
                     continue;
