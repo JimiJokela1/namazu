@@ -43,7 +43,7 @@ public class Spline
     public float EvaluateAngle(float t)
     {
         Vector2 dir = EvaluateDirection(t);
-        return Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        return Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90;
     }
 
 

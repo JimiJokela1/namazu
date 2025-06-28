@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System.Linq;
-using System.Threading;
-using System.Drawing;
 
 public class CatFish : MonoBehaviour
 {
@@ -16,13 +15,16 @@ public class CatFish : MonoBehaviour
 
     private List<Tile> coveringTiles = new List<Tile>();
 
+    private Image image;
+
     void Start()
     {
         rectTransform = GetComponent<RectTransform>();
+        image = GetComponentInChildren<Image>();
 
         Vector2 offset = new Vector2(GameManager.Instance.TileCountX, GameManager.Instance.TileCountY) * 32 / 2;
         spline = new Spline();
-        List<Vector2> points = new List<Vector2>() { GetRandomDirection() * 700 + offset, GetRandomDirection() * 200 + offset, GetRandomDirection() * 700 + offset, };
+        List<Vector2> points = new List<Vector2>() { GetRandomDirection() * 900 + offset, GetRandomDirection() * 200 + offset, GetRandomDirection() * 900 + offset, };
         spline.SetPoints(points, new List<Vector2>() { GetRandomDirection() * 150, GetRandomDirection() * 150, GetRandomDirection() * 150, });
         foreach (Vector2 point in points)
         {
@@ -43,8 +45,14 @@ public class CatFish : MonoBehaviour
     void Movement()
     {
         timer += speed * Time.fixedDeltaTime;
+        transform.localScale = new Vector3((Mathf.FloorToInt(timer * 40) % 2) * 2 - 1, 1, 1);
         transform.localPosition = spline.EvaluatePosition(timer);
         transform.localRotation = Quaternion.Euler(0, 0, spline.EvaluateAngle(timer));
+
+        if (timer > 1)
+        {
+            Destroy(gameObject);
+        }
     }
 
     void ShuffleTiles()
@@ -66,6 +74,12 @@ public class CatFish : MonoBehaviour
         {
             for (int x = 0; x < GameManager.Instance.TileCountX; x++)
             {
+                if (GameManager.Instance.Tiles[x, y].TileType == TileType.Blocked)
+                {
+                    continue;
+                }
+
+
                 if ((normalizedPos - new Vector2(x, y)).sqrMagnitude < range * range)
                 {
                     if (!coveringTiles.Contains(GameManager.Instance.Tiles[x, y]) && !GameManager.Instance.Tiles[x, y].shuffled)

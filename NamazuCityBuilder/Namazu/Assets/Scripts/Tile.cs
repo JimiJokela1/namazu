@@ -55,7 +55,8 @@ public class Tile : MonoBehaviour, IPointerDownHandler
     {
         GameManager.Instance.BuiltBuildings.Remove(currentBuildingObject);
         Destroy(currentBuildingObject.gameObject);
-        
+        currentBuildingObject = null;
+
         GameManager.Instance.TotalPopulation -= TileBuilding.PopulationGain;
     }
 
@@ -65,7 +66,7 @@ public class Tile : MonoBehaviour, IPointerDownHandler
         {
             GameManager.Instance.UpdateResource(resource.Resource, resource.Amount);
         }
-        
+
         DestroyBuilding();
     }
 
