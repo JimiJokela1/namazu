@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public GameObject CrystalTilePrefab;
     public GameObject StoneTilePrefab;
     public GameObject NormalTilePrefab;
+    public GameObject BackgroundTilePrefab;
 
     public GameObject SceneryPrefab;
     public Transform SceneryParent;
@@ -100,7 +101,7 @@ public class GameManager : MonoBehaviour
         {
             for (int x = 0; x < TileCountX; x++)
             {
-                GameObject tileGo = Instantiate(NormalTilePrefab, TilesParent);
+                GameObject tileGo = Instantiate(BackgroundTilePrefab, TilesParent);
                 tileGo.transform.localPosition = new Vector3(x * 32, y * 32, -1);
             }
         }
@@ -242,6 +243,30 @@ public class GameManager : MonoBehaviour
                         continue;
                     }
 
+                    if (building.BuildingType.PowerNeed)
+                    {
+                        bool hasPower = false;
+                        List<Building> neighboringBuildings = GetNeighbouringBuildings(building.Tile);
+                        Debug.Log("Neighboring buildings: " + neighboringBuildings.Count);
+                        if (neighboringBuildings.Count > 0)
+                        {
+                            foreach (Building neighBuilding in neighboringBuildings)
+                            {
+                                if (neighBuilding.BuildingType.PowerProduction > 0 ||
+                                    neighBuilding.BuildingType.PowerRange > 0)
+                                {
+                                    hasPower = true;
+                                }
+                            }
+                        }
+                        
+                        if (!hasPower)
+                        {
+                            Debug.Log("Building doesn't have power!");
+                            continue;
+                        }
+                    }
+
                     foreach (ResourceAmount resourceAmount in building.BuildingType.ResourceProductionCost)
                     {
                         UpdateResource(resourceAmount.Resource, -resourceAmount.Amount);
@@ -346,8 +371,13 @@ public class GameManager : MonoBehaviour
 
         for (int y = tile.positionOnGrid.y - 1; y < tile.positionOnGrid.y + 1; y++)
         {
-            for (int x = tile.positionOnGrid.x - 1; y < tile.positionOnGrid.x + 1; x++)
+            for (int x = tile.positionOnGrid.x - 1; x < tile.positionOnGrid.x + 1; x++)
             {
+                if (x < 0 || x >= TileCountX)
+                    continue;
+                if (y < 0 || y >= TileCountY)
+                    continue;
+
                 if (Tiles[x, y].TileBuilding != null)
                 {
                     buildings.Add(Tiles[x,y].currentBuildingObject);

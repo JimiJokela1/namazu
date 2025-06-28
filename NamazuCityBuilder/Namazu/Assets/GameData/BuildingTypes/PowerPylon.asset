@@ -24,5 +24,6 @@ MonoBehaviour:
   ProductionPerTicks: 30
   PopulationGain: 0
   PowerProduction: 0
-  PowerRange: 5
+  PowerRange: 1
+  PowerNeed: 0
   BuildingSprite: {fileID: 1729823076, guid: 2500e2e1699a8d94d98483ee8966bb76, type: 3}

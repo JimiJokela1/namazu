@@ -14,6 +14,7 @@ public class BuildingType : ScriptableObject
     public int PopulationGain = 0;
     public int PowerProduction = 0;
     public int PowerRange = 0;
+    public bool PowerNeed = false;
 
     public Sprite BuildingSprite;
 }

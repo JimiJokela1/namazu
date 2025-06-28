@@ -3042,7 +3042,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5.4
+  orthographic size: 2.21
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -3377,6 +3377,7 @@ MonoBehaviour:
   CrystalTilePrefab: {fileID: 5250459142161185347, guid: 5bc06e383e9bb5144b52a59d49ebb38c, type: 3}
   StoneTilePrefab: {fileID: 6181769070293014514, guid: 99f282d76a4b2634dbbfa9eaf6f0efa8, type: 3}
   NormalTilePrefab: {fileID: 5407885313678003699, guid: 53c71987829f9e548826a55ff1db20c9, type: 3}
+  BackgroundTilePrefab: {fileID: 5407885313678003699, guid: a1aa5797524229f44a5e96fe8fe7af39, type: 3}
   SceneryPrefab: {fileID: 2710346597303899799, guid: 7da2a4c484ef64943b0d2ff998535dd7, type: 3}
   SceneryParent: {fileID: 237171713}
   MountainSprite: {fileID: 21300000, guid: 1141b27a5b6fe0242a1606cff5c7c4e7, type: 3}

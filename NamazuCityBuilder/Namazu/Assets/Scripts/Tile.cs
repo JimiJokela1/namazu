@@ -49,6 +49,7 @@ public class Tile : MonoBehaviour, IPointerDownHandler
 
         currentBuildingObject = building.GetComponent<Building>();
         building.GetComponentInChildren<Image>().sprite = TileBuilding.BuildingSprite;
+        currentBuildingObject.Tile = this;
 
         AudioSource.PlayClipAtPoint(GameManager.Instance.BuildAudio, Vector3.zero, 0.5f);
 
