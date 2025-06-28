@@ -1,27 +1,50 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System.Threading;
+using System.Drawing;
 
 public class CatFish : MonoBehaviour
 {
     private RectTransform rectTransform;
 
     public float range = 5;
+    public float speed = 0.05f;
+
+    private float timer = 0;
+    public Spline spline;
 
     private List<Tile> coveringTiles = new List<Tile>();
 
     void Start()
     {
         rectTransform = GetComponent<RectTransform>();
+
+        Vector2 offset = new Vector2(GameManager.Instance.TileCountX, GameManager.Instance.TileCountY) * 32 / 2;
+        spline = new Spline();
+        List<Vector2> points = new List<Vector2>() { GetRandomDirection() * 700 + offset, GetRandomDirection() * 200 + offset, GetRandomDirection() * 700 + offset, };
+        spline.SetPoints(points, new List<Vector2>() { GetRandomDirection() * 150, GetRandomDirection() * 150, GetRandomDirection() * 150, });
+        foreach (Vector2 point in points)
+        {
+            print(point);
+        }
     }
 
     void FixedUpdate()
     {
+        Movement();
         GetTilesInRange();
         if (coveringTiles.Count >= 2)
         {
             ShuffleTiles();
         }
+    }
+
+    void Movement()
+    {
+        timer += speed * Time.fixedDeltaTime;
+        transform.localPosition = spline.EvaluatePosition(timer);
+        transform.localRotation = Quaternion.Euler(0, 0, spline.EvaluateAngle(timer));
     }
 
     void ShuffleTiles()
@@ -66,4 +89,14 @@ public class CatFish : MonoBehaviour
             }
         }
     }
+
+    Vector2 GetRandomDirection()
+    {
+        float a = Random.Range(-Mathf.PI, Mathf.PI);
+        return new Vector2(Mathf.Sin(a), Mathf.Cos(a));
+    }
 }
+
+
+
+
