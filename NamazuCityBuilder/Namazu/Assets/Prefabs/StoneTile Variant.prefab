@@ -104,6 +104,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: StoneTile Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 7886146018703369778, guid: 53c71987829f9e548826a55ff1db20c9, type: 3}
+      propertyPath: TileType
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

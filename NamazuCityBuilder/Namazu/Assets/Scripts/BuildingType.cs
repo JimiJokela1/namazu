@@ -4,6 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "BuildingType", menuName = "Building Type")]
 public class BuildingType : ScriptableObject
 {
+    public TileType RequiredTileType;
     public GameObject BuildingPrefab;
     public List<ResourceAmount> BuildingCosts;
     public List<ResourceAmount> ResourceProduction;

@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance => FindAnyObjectByType<UIManager>();
 
     public List<TextMeshProUGUI> ResourceTexts;
+    public TextMeshProUGUI CostText;
 
     public void UpdateResourceTexts(Dictionary<ResourceType, int> resourceTypes)
     {
@@ -24,4 +25,15 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void UpdateCostText(List<ResourceAmount> cost)
+    {
+        string costText = "Cost: ";
+
+        foreach (ResourceAmount resource in cost)
+        {
+            costText += resource.Amount + " " + Enum.GetName(typeof(ResourceType), resource.Resource);
+        }
+
+        CostText.text = costText;
+    }
 }

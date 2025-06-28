@@ -113,41 +113,49 @@ public class GameManager : MonoBehaviour
     public void SelectOreMine()
     {
         SelectedBuildingType = BuildingTypes.Find(b => b.name == "OreMine");
+        UIManager.Instance.UpdateCostText(SelectedBuildingType.BuildingCosts);
     }
 
     public void SelectStoneMine()
     {
         SelectedBuildingType = BuildingTypes.Find(b => b.name == "StoneMine");
+        UIManager.Instance.UpdateCostText(SelectedBuildingType.BuildingCosts);
     }
 
     public void SelectCrystalMine()
     {
         SelectedBuildingType = BuildingTypes.Find(b => b.name == "CrystalMine");
+        UIManager.Instance.UpdateCostText(SelectedBuildingType.BuildingCosts);
     }
 
     public void SelectFactory()
     {
         SelectedBuildingType = BuildingTypes.Find(b => b.name == "Factory");
+        UIManager.Instance.UpdateCostText(SelectedBuildingType.BuildingCosts);
     }
 
     public void SelectFarm()
     {
         SelectedBuildingType = BuildingTypes.Find(b => b.name == "Farm");
+        UIManager.Instance.UpdateCostText(SelectedBuildingType.BuildingCosts);
     }
 
     public void SelectResidential()
     {
         SelectedBuildingType = BuildingTypes.Find(b => b.name == "Residential");
+        UIManager.Instance.UpdateCostText(SelectedBuildingType.BuildingCosts);
     }
 
     public void SelectPowerProduction()
     {
         SelectedBuildingType = BuildingTypes.Find(b => b.name == "PowerProduction");
+        UIManager.Instance.UpdateCostText(SelectedBuildingType.BuildingCosts);
     }
 
     public void SelectPowerPylon()
     {
         SelectedBuildingType = BuildingTypes.Find(b => b.name == "PowerPylon");
+        UIManager.Instance.UpdateCostText(SelectedBuildingType.BuildingCosts);
     }
 
 

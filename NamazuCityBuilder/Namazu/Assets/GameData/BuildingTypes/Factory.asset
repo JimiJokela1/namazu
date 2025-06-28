@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e992f3ebf22d1a34e941be9e99e53fb2, type: 3}
   m_Name: Factory
   m_EditorClassIdentifier: 
+  RequiredTileType: 4
   BuildingPrefab: {fileID: 416360443700239970, guid: 8d439c71011e54445922904b4e6f33ca, type: 3}
   BuildingCosts:
   - Resource: 2
