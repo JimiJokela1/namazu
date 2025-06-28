@@ -5,22 +5,19 @@ using UnityEngine;
 public class BuildingType : ScriptableObject
 {
     public GameObject BuildingPrefab;
-    public List<BuildingCost> BuildingCosts;
+    public List<ResourceAmount> BuildingCosts;
+    public List<ResourceAmount> ResourceProduction;
+    public List<ResourceAmount> ResourceProductionCost;
+    public int ProductionPerTicks = 10; // How many ticks must pass before production happens
 
-    public Dictionary<ResourceType, int> ResourceCosts()
-    {
-        Dictionary<ResourceType, int> resourceTypes = new Dictionary<ResourceType, int>();
-        foreach (BuildingCost buildingCost in BuildingCosts)
-        {
-            resourceTypes.Add(buildingCost.Resource, buildingCost.Cost);
-        }
-        return resourceTypes;
-    }
+    public int PopulationGain = 0;
+    public int PowerProduction = 0;
+    public int PowerRange = 0;
 }
 
 [System.Serializable]
-public class BuildingCost
+public class ResourceAmount
 {
     public ResourceType Resource;
-    public int Cost;
+    public int Amount;
 }

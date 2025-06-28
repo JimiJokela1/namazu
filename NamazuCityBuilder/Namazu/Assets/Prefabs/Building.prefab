@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 821097206076873115}
   - component: {fileID: 4760489562429115366}
+  - component: {fileID: 7029001040129343626}
   m_Layer: 5
   m_Name: Building
   m_TagString: Untagged
@@ -45,6 +46,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 416360443700239970}
   m_CullTransparentMesh: 1
+--- !u!114 &7029001040129343626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 416360443700239970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8052c3e95b9dd04eb894ca1d78af5d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BuildingType: {fileID: 0}
 --- !u!1 &5722609228078968117
 GameObject:
   m_ObjectHideFlags: 0

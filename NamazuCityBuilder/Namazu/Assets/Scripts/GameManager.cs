@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,9 +15,11 @@ public class GameManager : MonoBehaviour
     public int TileCountY;
     public int TileCountX;
 
+    public List<Building> BuiltBuildings = new List<Building>();
+
     public int InitialOre = 0;
     public int InitialMetal = 0;
-    public int InitialStone = 100;
+    public int InitialStone = 0;
     public int InitialCrystal = 0;
     public int InitialFood = 0;
 
@@ -33,6 +36,8 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.UpdateResourceTexts(PlayerResources);
 
         GenerateTiles();
+
+        StartCoroutine(TickLogic());
     }
 
     public void GenerateTiles()
@@ -49,6 +54,36 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public IEnumerator TickLogic()
+    {
+        int currentTick = 0;
+        while (true)
+        {
+            yield return new WaitForSeconds(0.1f);
+
+            foreach (var building in BuiltBuildings)    
+            {
+                if (currentTick % building.BuildingType.ProductionPerTicks == 0)
+                {
+                    if (!CanAffordResourceCost(building.BuildingType.ResourceProductionCost))
+                        continue;
+
+                    foreach (ResourceAmount resourceAmount in building.BuildingType.ResourceProductionCost)
+                    {
+                        UpdateResource(resourceAmount.Resource, -resourceAmount.Amount);
+                    }
+
+                    foreach (ResourceAmount production in building.BuildingType.ResourceProduction)
+                    {
+                        UpdateResource(production.Resource, production.Amount);
+                    }
+                }
+            }
+
+            currentTick++;
+        }
+    }
+
     public void UpdateResource(ResourceType type, int change)
     {
         PlayerResources[type] += change;
@@ -56,29 +91,65 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.UpdateResourceTexts(PlayerResources);
     }
 
-    public void RemoveResources(Dictionary<ResourceType, int> costs)
+    public void RemoveResources(List<ResourceAmount> resources)
     {
-        foreach (var cost in costs)
+        foreach (var cost in resources)
         {
-            UpdateResource(cost.Key, -cost.Value);
+            UpdateResource(cost.Resource, -cost.Amount);
         }
     }
 
-    public bool CanAffordResourceCost(Dictionary<ResourceType, int> resourceCosts)
+    public bool CanAffordResourceCost(List<ResourceAmount> resourceCosts)
     {
         foreach (var resourceCost in resourceCosts)
         {
-            if (PlayerResources[resourceCost.Key] < resourceCost.Value)
+            if (PlayerResources[resourceCost.Resource] < resourceCost.Amount)
                 return false;
         }
 
         return true;
     }
 
-    public void SelectBuildingType1()
+    public void SelectOreMine()
     {
-        SelectedBuildingType = BuildingTypes[0];
+        SelectedBuildingType = BuildingTypes.Find(b => b.name == "OreMine");
     }
+
+    public void SelectStoneMine()
+    {
+        SelectedBuildingType = BuildingTypes.Find(b => b.name == "StoneMine");
+    }
+
+    public void SelectCrystalMine()
+    {
+        SelectedBuildingType = BuildingTypes.Find(b => b.name == "CrystalMine");
+    }
+
+    public void SelectFactory()
+    {
+        SelectedBuildingType = BuildingTypes.Find(b => b.name == "Factory");
+    }
+
+    public void SelectFarm()
+    {
+        SelectedBuildingType = BuildingTypes.Find(b => b.name == "Farm");
+    }
+
+    public void SelectResidential()
+    {
+        SelectedBuildingType = BuildingTypes.Find(b => b.name == "Residential");
+    }
+
+    public void SelectPowerProduction()
+    {
+        SelectedBuildingType = BuildingTypes.Find(b => b.name == "PowerProduction");
+    }
+
+    public void SelectPowerPylon()
+    {
+        SelectedBuildingType = BuildingTypes.Find(b => b.name == "PowerPylon");
+    }
+
 
 }
 
