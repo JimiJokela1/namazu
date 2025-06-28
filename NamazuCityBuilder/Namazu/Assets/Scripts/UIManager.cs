@@ -7,11 +7,14 @@ using Image = UnityEngine.UI.Image;
 
 public class UIManager : MonoBehaviour
 {
-    public static UIManager Instance => FindAnyObjectByType<UIManager>();
+    public static UIManager Instance = null;
 
     public List<TextMeshProUGUI> ResourceTexts;
+    public Transform ResourceTextsParent;
     public Transform CostsParent;
     public GameObject CostPrefab;
+    public TextMeshProUGUI PopulationText;
+    public TextMeshProUGUI StarvingText;
 
     public Sprite CrystalIcon;
     public Sprite OreIcon;
@@ -21,19 +24,29 @@ public class UIManager : MonoBehaviour
     public Sprite PowerIcon;
     public Sprite NoPowerIcon;
 
+    void Awake()
+    {
+        Instance = FindAnyObjectByType<UIManager>();
+    }
+
     public void UpdateResourceTexts(Dictionary<ResourceType, int> resourceTypes)
     {
-        int ndx = 0;
-        foreach (KeyValuePair<ResourceType, int> resource in resourceTypes)
+        foreach (Transform child in ResourceTextsParent)
         {
-            ResourceTexts[ndx++].text = Enum.GetName(typeof(ResourceType), resource.Key) + ": " + resource.Value;
+            Destroy(child.gameObject);
         }
 
-        // Disable extra texts
-        for (; ndx < ResourceTexts.Count; ndx++)
+        foreach (var resource in resourceTypes)
         {
-            ResourceTexts[ndx].text = "";
+            GameObject resourceObj = Instantiate(CostPrefab, ResourceTextsParent);
+            resourceObj.GetComponentInChildren<TextMeshProUGUI>().text = Enum.GetName(typeof(ResourceType), resource.Key) + ": " + resource.Value.ToString();
+            resourceObj.GetComponentInChildren<Image>().sprite = GetResourceSprite(resource.Key);
         }
+    }
+
+    public void UpdatePopulationText()
+    {
+        PopulationText.text = "Population: " + GameManager.Instance.TotalPopulation;
     }
 
     public void UpdateCostText(List<ResourceAmount> cost)
@@ -69,6 +82,18 @@ public class UIManager : MonoBehaviour
             default:
                 Debug.LogError("No resource icon set: " + Enum.GetName(typeof(ResourceType), resourceAmountResource));
                 return null;
+        }
+    }
+
+    public void UpdateStarvingText(bool starving)
+    {
+        if (starving)
+        {
+            StarvingText.text = "People are starving!!!";
+        }
+        else
+        {
+            StarvingText.text = "";
         }
     }
 }

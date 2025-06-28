@@ -15,6 +15,20 @@ public class GameManager : MonoBehaviour
     public int TileCountY;
     public int TileCountX;
 
+    private int _totalPopulation = 0;
+    public int TotalPopulation
+    {
+        get
+        {
+            return _totalPopulation;
+        }
+        set
+        {
+            _totalPopulation = value;
+            UIManager.Instance.UpdatePopulationText();
+        }
+    }
+
     public List<Building> BuiltBuildings = new List<Building>();
 
     public int InitialOre = 0;
@@ -87,7 +101,14 @@ public class GameManager : MonoBehaviour
                 if (currentTick % building.BuildingType.ProductionPerTicks == 0)
                 {
                     if (!CanAffordResourceCost(building.BuildingType.ResourceProductionCost))
+                    {
+                        if (building.BuildingType.PopulationGain > 0)
+                        {
+                            // People are starving!
+                            UIManager.Instance.UpdateStarvingText(true);
+                        }
                         continue;
+                    }
 
                     foreach (ResourceAmount resourceAmount in building.BuildingType.ResourceProductionCost)
                     {
@@ -177,6 +198,24 @@ public class GameManager : MonoBehaviour
     {
         SelectedBuildingType = BuildingTypes.Find(b => b.name == "PowerPylon");
         UIManager.Instance.UpdateCostText(SelectedBuildingType.BuildingCosts);
+    }
+
+    public List<Building> GetNeighbouringBuildings(Tile tile)
+    {
+        List<Building> buildings = new List<Building>();
+
+        for (int y = tile.positionOnGrid.y - 1; y < tile.positionOnGrid.y + 1; y++)
+        {
+            for (int x = tile.positionOnGrid.x - 1; y < tile.positionOnGrid.x + 1; x++)
+            {
+                if (Tiles[x, y].TileBuilding != null)
+                {
+                    buildings.Add(Tiles[x,y].currentBuildingObject);
+                }
+            }
+        }
+
+        return buildings;
     }
 }
 

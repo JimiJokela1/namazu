@@ -18,8 +18,10 @@ MonoBehaviour:
   - Resource: 1
     Amount: 5
   ResourceProduction: []
-  ResourceProductionCost: []
+  ResourceProductionCost:
+  - Resource: 4
+    Amount: 2
   ProductionPerTicks: 30
-  PopulationGain: 0
+  PopulationGain: 12
   PowerProduction: 0
   PowerRange: 0
