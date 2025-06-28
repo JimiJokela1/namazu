@@ -312,8 +312,10 @@ public class GameManager : MonoBehaviour
                         if (!hasPower)
                         {
                             Debug.Log("Building doesn't have power!");
+                            building.SetNoPowerIcon(true);
                             continue;
                         }
+                        building.SetNoPowerIcon(false);
                     }
 
                     foreach (ResourceAmount resourceAmount in building.BuildingType.ResourceProductionCost)
