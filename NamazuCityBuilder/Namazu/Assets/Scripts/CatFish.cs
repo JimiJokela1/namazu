@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using System.Collections;
 
 public class CatFish : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class CatFish : MonoBehaviour
     private float timer = 0;
     public Spline spline;
 
+    private AudioSource audioSource;
+    private bool exiting = false;
+
     private List<Tile> coveringTiles = new List<Tile>();
 
     private Image image;
@@ -21,15 +25,14 @@ public class CatFish : MonoBehaviour
     {
         rectTransform = GetComponent<RectTransform>();
         image = GetComponentInChildren<Image>();
+        audioSource = GetComponent<AudioSource>();
 
         Vector2 offset = new Vector2(GameManager.Instance.TileCountX, GameManager.Instance.TileCountY) * 32 / 2;
         spline = new Spline();
         List<Vector2> points = new List<Vector2>() { GetRandomDirection() * 900 + offset, GetRandomDirection() * 200 + offset, GetRandomDirection() * 900 + offset, };
         spline.SetPoints(points, new List<Vector2>() { GetRandomDirection() * 150, GetRandomDirection() * 150, GetRandomDirection() * 150, });
-        foreach (Vector2 point in points)
-        {
-            print(point);
-        }
+
+        StartCoroutine(AudioFade(true));
     }
 
     void FixedUpdate()
@@ -48,6 +51,12 @@ public class CatFish : MonoBehaviour
         transform.localScale = new Vector3((Mathf.FloorToInt(timer * 40) % 2) * 2 - 1, 1, 1);
         transform.localPosition = spline.EvaluatePosition(timer);
         transform.localRotation = Quaternion.Euler(0, 0, spline.EvaluateAngle(timer));
+
+        if (timer > 1 - speed && !exiting)
+        {
+            StartCoroutine(AudioFade(false));
+            exiting = true;
+        }
 
         if (timer > 1)
         {
@@ -108,6 +117,20 @@ public class CatFish : MonoBehaviour
     {
         float a = Random.Range(-Mathf.PI, Mathf.PI);
         return new Vector2(Mathf.Sin(a), Mathf.Cos(a));
+    }
+
+    IEnumerator AudioFade(bool fadeIn)
+    {
+        float T = 0;
+
+        while (T < 1)
+        {
+            T += Time.deltaTime;
+
+            audioSource.volume = Mathf.Lerp(fadeIn ? 0 : 1, fadeIn ? 1 : 0, T);
+
+            yield return null;
+        }
     }
 }
 
