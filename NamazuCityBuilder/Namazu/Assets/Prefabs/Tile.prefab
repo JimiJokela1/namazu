@@ -90,6 +90,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentBuildingObject: {fileID: 0}
   TileBuilding: {fileID: 0}
-  TileType: 0
+  TileType: 4
   positionOnGrid: {x: 0, y: 0}
   shuffled: 0

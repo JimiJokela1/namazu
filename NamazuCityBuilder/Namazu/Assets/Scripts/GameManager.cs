@@ -41,6 +41,14 @@ public class GameManager : MonoBehaviour
     public float BambooChance = 5;
     public float Bamboo2Chance = 5;
 
+    public AudioClip ButtonAudio;
+    public AudioClip BuildAudio;
+    public AudioClip DestroyAudio;
+    public AudioClip EarthquakeAudio;
+    public AudioClip Music;
+
+    public AudioSource MusicAudioSource;
+
     private int _totalPopulation = 0;
     public int TotalPopulation
     {
@@ -280,48 +288,56 @@ public class GameManager : MonoBehaviour
     {
         SelectedBuildingType = BuildingTypes.Find(b => b.name == "OreMine");
         UIManager.Instance.UpdateCostText(SelectedBuildingType.BuildingCosts);
+        AudioSource.PlayClipAtPoint(ButtonAudio, Vector3.zero);
     }
 
     public void SelectStoneMine()
     {
         SelectedBuildingType = BuildingTypes.Find(b => b.name == "StoneMine");
         UIManager.Instance.UpdateCostText(SelectedBuildingType.BuildingCosts);
+        AudioSource.PlayClipAtPoint(ButtonAudio, Vector3.zero);
     }
 
     public void SelectCrystalMine()
     {
         SelectedBuildingType = BuildingTypes.Find(b => b.name == "CrystalMine");
         UIManager.Instance.UpdateCostText(SelectedBuildingType.BuildingCosts);
+        AudioSource.PlayClipAtPoint(ButtonAudio, Vector3.zero);
     }
 
     public void SelectFactory()
     {
         SelectedBuildingType = BuildingTypes.Find(b => b.name == "Factory");
         UIManager.Instance.UpdateCostText(SelectedBuildingType.BuildingCosts);
+        AudioSource.PlayClipAtPoint(ButtonAudio, Vector3.zero);
     }
 
     public void SelectFarm()
     {
         SelectedBuildingType = BuildingTypes.Find(b => b.name == "Farm");
         UIManager.Instance.UpdateCostText(SelectedBuildingType.BuildingCosts);
+        AudioSource.PlayClipAtPoint(ButtonAudio, Vector3.zero);
     }
 
     public void SelectResidential()
     {
         SelectedBuildingType = BuildingTypes.Find(b => b.name == "Residential");
         UIManager.Instance.UpdateCostText(SelectedBuildingType.BuildingCosts);
+        AudioSource.PlayClipAtPoint(ButtonAudio, Vector3.zero);
     }
 
     public void SelectPowerProduction()
     {
         SelectedBuildingType = BuildingTypes.Find(b => b.name == "PowerProduction");
         UIManager.Instance.UpdateCostText(SelectedBuildingType.BuildingCosts);
+        AudioSource.PlayClipAtPoint(ButtonAudio, Vector3.zero);
     }
 
     public void SelectPowerPylon()
     {
         SelectedBuildingType = BuildingTypes.Find(b => b.name == "PowerPylon");
         UIManager.Instance.UpdateCostText(SelectedBuildingType.BuildingCosts);
+        AudioSource.PlayClipAtPoint(ButtonAudio, Vector3.zero);
     }
 
     public List<Building> GetNeighbouringBuildings(Tile tile)
