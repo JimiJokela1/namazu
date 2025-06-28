@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance => FindAnyObjectByType<GameManager>();
+    public static GameManager Instance = null;
 
     public BuildingType SelectedBuildingType;
     public Transform BuildingsParent;
@@ -24,6 +24,11 @@ public class GameManager : MonoBehaviour
     public int InitialFood = 0;
 
     public Dictionary<ResourceType, int> PlayerResources = new Dictionary<ResourceType, int>();
+
+    void Awake()
+    {
+        Instance = FindAnyObjectByType<GameManager>();
+    }
 
     void Start()
     {
@@ -50,8 +55,24 @@ public class GameManager : MonoBehaviour
                 GameObject tileGo = Instantiate(TilePrefabs[Random.Range(0, TilePrefabs.Count)], TilesParent);
                 tileGo.transform.localPosition = new Vector3(x * 32, y * 32, 0);
                 Tiles[x, y] = tileGo.GetComponent<Tile>();
+                Tiles[x, y].positionOnGrid = new Vector2Int(x, y);
             }
         }
+    }
+
+    public void SwitchTiles(Vector2Int a, Vector2Int b)
+    {
+        Tile temp = Tiles[a.x, a.y];
+        Tiles[a.x, a.y] = Tiles[b.x, b.y];
+        Tiles[b.x, b.y] = temp;
+
+        Tiles[a.x, a.y].transform.localPosition = new Vector3(a.x * 32, a.y * 32, 0);
+        Tiles[a.x, a.y].positionOnGrid = new Vector2Int(a.x, a.y);
+        Tiles[a.x, a.y].RepositionBuilding();
+
+        Tiles[b.x, b.y].transform.localPosition = new Vector3(b.x * 32, b.y * 32, 0);
+        Tiles[b.x, b.y].positionOnGrid = new Vector2Int(b.x, b.y);
+        Tiles[b.x, b.y].RepositionBuilding();
     }
 
     public IEnumerator TickLogic()
@@ -61,7 +82,7 @@ public class GameManager : MonoBehaviour
         {
             yield return new WaitForSeconds(0.1f);
 
-            foreach (var building in BuiltBuildings)    
+            foreach (var building in BuiltBuildings)
             {
                 if (currentTick % building.BuildingType.ProductionPerTicks == 0)
                 {
