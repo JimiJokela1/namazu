@@ -157,8 +157,6 @@ public class GameManager : MonoBehaviour
         SelectedBuildingType = BuildingTypes.Find(b => b.name == "PowerPylon");
         UIManager.Instance.UpdateCostText(SelectedBuildingType.BuildingCosts);
     }
-
-
 }
 
 public enum ResourceType
