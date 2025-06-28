@@ -12,12 +12,15 @@ public class Tile : MonoBehaviour, IPointerDownHandler
 
         if (GameManager.Instance.SelectedBuildingType != null)
         {
-            TileBuilding = GameManager.Instance.SelectedBuildingType;
+            if (GameManager.Instance.CanAffordResourceCost(GameManager.Instance.SelectedBuildingType.ResourceCosts()))
+            {
+                GameManager.Instance.RemoveResources(GameManager.Instance.SelectedBuildingType.ResourceCosts());
+                TileBuilding = GameManager.Instance.SelectedBuildingType;
+                GameObject building = Instantiate(TileBuilding.BuildingPrefab, GameManager.Instance.BuildingsParent);
 
-            GameObject building = Instantiate(TileBuilding.BuildingPrefab, GameManager.Instance.BuildingsParent);
-
-            building.transform.position = transform.position;
-            building.transform.position += Vector3.up;
+                building.transform.position = transform.position;
+                building.transform.position += Vector3.up;
+            }
         }
     }
 }

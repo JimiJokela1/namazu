@@ -13,3 +13,6 @@ MonoBehaviour:
   m_Name: BuildingType1
   m_EditorClassIdentifier: 
   BuildingPrefab: {fileID: 416360443700239970, guid: 8d439c71011e54445922904b4e6f33ca, type: 3}
+  BuildingCosts:
+  - Resource: 2
+    Cost: 20
