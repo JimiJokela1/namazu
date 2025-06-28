@@ -14,6 +14,8 @@ public class BuildingType : ScriptableObject
     public int PopulationGain = 0;
     public int PowerProduction = 0;
     public int PowerRange = 0;
+
+    public Sprite BuildingSprite;
 }
 
 [System.Serializable]

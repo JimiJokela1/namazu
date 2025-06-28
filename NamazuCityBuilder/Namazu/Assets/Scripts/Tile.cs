@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Tile : MonoBehaviour, IPointerDownHandler
 {
@@ -47,6 +48,7 @@ public class Tile : MonoBehaviour, IPointerDownHandler
         building.transform.position += Vector3.up;
 
         currentBuildingObject = building.GetComponent<Building>();
+        building.GetComponentInChildren<Image>().sprite = TileBuilding.BuildingSprite;
 
         GameManager.Instance.TotalPopulation += TileBuilding.PopulationGain;
     }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,6 +15,31 @@ public class GameManager : MonoBehaviour
     public Tile[,] Tiles;
     public int TileCountY;
     public int TileCountX;
+
+    public GameObject OreTilePrefab;
+    public GameObject CrystalTilePrefab;
+    public GameObject StoneTilePrefab;
+    public GameObject NormalTilePrefab;
+
+    public GameObject SceneryPrefab;
+    public Transform SceneryParent;
+    public Sprite MountainSprite;
+    public Sprite ForestSprite;
+    public Sprite HillSprite;
+    public Sprite Hill2Sprite;
+    public Sprite BambooSprite;
+    public Sprite Bamboo2Sprite;
+
+    public float OreChancePercent = 20;
+    public float CrystalChancePercent = 20;
+    public float StoneChancePercent = 20;
+
+    public float MountainChance = 5;
+    public float HillChance = 5;
+    public float Hill2Chance = 5;
+    public float ForestChance = 5;
+    public float BambooChance = 5;
+    public float Bamboo2Chance = 5;
 
     private int _totalPopulation = 0;
     public int TotalPopulation
@@ -61,15 +87,113 @@ public class GameManager : MonoBehaviour
 
     public void GenerateTiles()
     {
+        // Generate background tiles
+        for (int y = 0; y < TileCountY; y++)
+        {
+            for (int x = 0; x < TileCountX; x++)
+            {
+                GameObject tileGo = Instantiate(NormalTilePrefab, TilesParent);
+                tileGo.transform.localPosition = new Vector3(x * 32, y * 32, -1);
+            }
+        }
+
         Tiles = new Tile[TileCountX, TileCountY];
         for (int y = 0; y < TileCountY; y++)
         {
             for (int x = 0; x < TileCountX; x++)
             {
-                GameObject tileGo = Instantiate(TilePrefabs[Random.Range(0, TilePrefabs.Count)], TilesParent);
+                GameObject tileGo = null;
+                float totalChance = OreChancePercent + CrystalChancePercent + StoneChancePercent;
+                float choice = Random.Range(0f, 100f);
+                if (choice < totalChance && choice >= totalChance - OreChancePercent)
+                {
+                    tileGo = Instantiate(OreTilePrefab, TilesParent);
+                    tileGo.transform.localPosition = new Vector3(x * 32, y * 32, 0);
+                    Tiles[x, y] = tileGo.GetComponent<Tile>();
+                    Tiles[x, y].positionOnGrid = new Vector2Int(x, y);
+                    continue;
+                }
+
+                totalChance -= OreChancePercent;
+                if (choice < totalChance && choice >= totalChance - CrystalChancePercent)
+                {
+                    tileGo = Instantiate(CrystalTilePrefab, TilesParent);
+                    tileGo.transform.localPosition = new Vector3(x * 32, y * 32, 0);
+                    Tiles[x, y] = tileGo.GetComponent<Tile>();
+                    Tiles[x, y].positionOnGrid = new Vector2Int(x, y);
+                    continue;
+                }
+
+                totalChance -= CrystalChancePercent;
+                if (choice < totalChance)
+                {
+                    tileGo = Instantiate(StoneTilePrefab, TilesParent);
+                    tileGo.transform.localPosition = new Vector3(x * 32, y * 32, 0);
+                    Tiles[x, y] = tileGo.GetComponent<Tile>();
+                    Tiles[x, y].positionOnGrid = new Vector2Int(x, y);
+                    continue;
+                }
+
+                tileGo = Instantiate(NormalTilePrefab, TilesParent);
                 tileGo.transform.localPosition = new Vector3(x * 32, y * 32, 0);
                 Tiles[x, y] = tileGo.GetComponent<Tile>();
                 Tiles[x, y].positionOnGrid = new Vector2Int(x, y);
+            }
+        }
+
+        for (int y = 0; y < TileCountY; y++)
+        {
+            for (int x = 0; x < TileCountX; x++)
+            {
+                if (Random.Range(0f, 100f) < MountainChance)
+                {
+                    GameObject scenObj = Instantiate(SceneryPrefab, SceneryParent);
+                    scenObj.GetComponentInChildren<Image>().sprite = MountainSprite;
+                    scenObj.GetComponentInChildren<Image>().rectTransform.sizeDelta = new Vector2(64, 64);
+                    scenObj.transform.localPosition = new Vector3(x * 32, y * 32, 1);
+                    Tiles[x, y].TileType = TileType.Blocked;
+                    if (Tiles.GetLength(0) > x + 1)
+                        Tiles[x + 1, y].TileType = TileType.Blocked;
+                    if (Tiles.GetLength(1) > y + 1)
+                        Tiles[x, y + 1].TileType = TileType.Blocked;
+                    if (Tiles.GetLength(0) > x + 1 && Tiles.GetLength(1) > y + 1)
+                        Tiles[x + 1, y + 1].TileType = TileType.Blocked;
+                }
+                else if (Random.Range(0f, 100f) < HillChance)
+                {
+                    GameObject scenObj = Instantiate(SceneryPrefab, SceneryParent);
+                    scenObj.GetComponentInChildren<Image>().sprite = HillSprite;
+                    scenObj.transform.localPosition = new Vector3(x * 32, y * 32, 1);
+                    Tiles[x, y].TileType = TileType.Blocked;
+                }
+                else if (Random.Range(0f, 100f) < Hill2Chance)
+                {
+                    GameObject scenObj = Instantiate(SceneryPrefab, SceneryParent);
+                    scenObj.GetComponentInChildren<Image>().sprite = Hill2Sprite;
+                    scenObj.transform.localPosition = new Vector3(x * 32, y * 32, 1);
+                    Tiles[x, y].TileType = TileType.Blocked;
+                }
+                else if (Random.Range(0f, 100f) < ForestChance)
+                {
+                    GameObject scenObj = Instantiate(SceneryPrefab, SceneryParent);
+                    scenObj.GetComponentInChildren<Image>().sprite = ForestSprite;
+                    scenObj.transform.localPosition = new Vector3(x * 32, y * 32, 1);
+                    Tiles[x, y].TileType = TileType.Blocked;
+                }
+                else if (Random.Range(0f, 100f) < BambooChance)
+                {
+                    GameObject scenObj = Instantiate(SceneryPrefab, SceneryParent);
+                    scenObj.GetComponentInChildren<Image>().sprite = BambooSprite;
+                    scenObj.transform.localPosition = new Vector3(x * 32, y * 32, 1);
+                    Tiles[x, y].TileType = TileType.Blocked;
+                }
+                else if (Random.Range(0f, 100f) < Bamboo2Chance)
+                {
+                    GameObject scenObj = Instantiate(SceneryPrefab, SceneryParent);
+                    scenObj.GetComponentInChildren<Image>().sprite = Bamboo2Sprite;
+                    scenObj.transform.localPosition = new Vector3(x * 32, y * 32, 1);
+                    Tiles[x, y].TileType = TileType.Blocked;
+                }
             }
         }
     }
