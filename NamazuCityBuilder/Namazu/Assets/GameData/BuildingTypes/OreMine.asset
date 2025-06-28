@@ -26,4 +26,6 @@ MonoBehaviour:
   PowerProduction: 0
   PowerRange: 0
   PowerNeed: 1
+  Description: Produces 3 ore periodically. Needs a neighbouring power building to
+    function.
   BuildingSprite: {fileID: 158330547, guid: 2500e2e1699a8d94d98483ee8966bb76, type: 3}

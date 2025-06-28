@@ -23,4 +23,6 @@ MonoBehaviour:
   PopulationGain: 0
   PowerProduction: 10
   PowerRange: 1
+  PowerNeed: 0
+  Description: Produces power for neighbouring buildings.
   BuildingSprite: {fileID: -728870316, guid: 2500e2e1699a8d94d98483ee8966bb76, type: 3}

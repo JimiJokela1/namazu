@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     public GameObject StoneTilePrefab;
     public GameObject NormalTilePrefab;
     public GameObject BackgroundTilePrefab;
+    public GameObject InvisibleTilePrefab;
 
     public GameObject SceneryPrefab;
     public Transform SceneryParent;
@@ -89,12 +90,59 @@ public class GameManager : MonoBehaviour
 
         UIManager.Instance.UpdateResourceTexts(PlayerResources);
 
-        GenerateTiles();
+        GeneratePremadeLevelTiles();
 
         StartCoroutine(TickLogic());
     }
 
-    public void GenerateTiles()
+    public void GeneratePremadeLevelTiles()
+    {
+        Tiles = new Tile[TileCountX, TileCountY];
+        for (int y = 0; y < TileCountY; y++)
+        {
+            for (int x = 0; x < TileCountX; x++)
+            {
+                GameObject tileGo = null;
+                float totalChance = OreChancePercent + CrystalChancePercent + StoneChancePercent;
+                float choice = Random.Range(0f, 100f);
+                if (choice < totalChance && choice >= totalChance - OreChancePercent)
+                {
+                    tileGo = Instantiate(OreTilePrefab, TilesParent);
+                    tileGo.transform.localPosition = new Vector3(x * 32, y * 32, 0);
+                    Tiles[x, y] = tileGo.GetComponent<Tile>();
+                    Tiles[x, y].positionOnGrid = new Vector2Int(x, y);
+                    continue;
+                }
+
+                totalChance -= OreChancePercent;
+                if (choice < totalChance && choice >= totalChance - CrystalChancePercent)
+                {
+                    tileGo = Instantiate(CrystalTilePrefab, TilesParent);
+                    tileGo.transform.localPosition = new Vector3(x * 32, y * 32, 0);
+                    Tiles[x, y] = tileGo.GetComponent<Tile>();
+                    Tiles[x, y].positionOnGrid = new Vector2Int(x, y);
+                    continue;
+                }
+
+                totalChance -= CrystalChancePercent;
+                if (choice < totalChance)
+                {
+                    tileGo = Instantiate(StoneTilePrefab, TilesParent);
+                    tileGo.transform.localPosition = new Vector3(x * 32, y * 32, 0);
+                    Tiles[x, y] = tileGo.GetComponent<Tile>();
+                    Tiles[x, y].positionOnGrid = new Vector2Int(x, y);
+                    continue;
+                }
+
+                tileGo = Instantiate(InvisibleTilePrefab, TilesParent);
+                tileGo.transform.localPosition = new Vector3(x * 32, y * 32, 0);
+                Tiles[x, y] = tileGo.GetComponent<Tile>();
+                Tiles[x, y].positionOnGrid = new Vector2Int(x, y);
+            }
+        }
+    }
+
+    public void GenerateRandomMapTiles()
     {
         // Generate background tiles
         for (int y = 0; y < TileCountY; y++)
@@ -150,6 +198,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
+         // Generate scenery
         for (int y = 0; y < TileCountY; y++)
         {
             for (int x = 0; x < TileCountX; x++)

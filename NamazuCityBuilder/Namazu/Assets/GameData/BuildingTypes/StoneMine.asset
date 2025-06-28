@@ -15,8 +15,8 @@ MonoBehaviour:
   RequiredTileType: 1
   BuildingPrefab: {fileID: 416360443700239970, guid: 8d439c71011e54445922904b4e6f33ca, type: 3}
   BuildingCosts:
-  - Resource: 2
-    Amount: 20
+  - Resource: 1
+    Amount: 5
   ResourceProduction:
   - Resource: 2
     Amount: 3
@@ -26,4 +26,5 @@ MonoBehaviour:
   PowerProduction: 0
   PowerRange: 0
   PowerNeed: 1
+  Description: Produces 3 stone periodically. Needs a neighbouring power building.
   BuildingSprite: {fileID: 158330547, guid: 2500e2e1699a8d94d98483ee8966bb76, type: 3}

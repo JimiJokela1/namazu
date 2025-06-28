@@ -25,4 +25,6 @@ MonoBehaviour:
   PopulationGain: 0
   PowerProduction: 0
   PowerRange: 0
+  PowerNeed: 0
+  Description: 'Produces 3 food periodically. '
   BuildingSprite: {fileID: 1252678871, guid: 2500e2e1699a8d94d98483ee8966bb76, type: 3}
