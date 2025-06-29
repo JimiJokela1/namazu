@@ -17,6 +17,8 @@ MonoBehaviour:
   BuildingCosts:
   - Resource: 2
     Amount: 20
+  - Resource: 3
+    Amount: 10
   ResourceProduction: []
   ResourceProductionCost: []
   ProductionPerTicks: 30
