@@ -35,6 +35,7 @@ public class Tile : MonoBehaviour, IPointerDownHandler
                 if (GameManager.Instance.SelectedBuildingType.RequiredTileType != TileType
                     && GameManager.Instance.SelectedBuildingType.RequiredTileType != TileType.Any)
                 {
+                    MessageBox.Instance.ShowMessage("Can't build that on that tile!");
                     Debug.Log("Can't build on that tile.");
                     return;
                 }
@@ -43,6 +44,7 @@ public class Tile : MonoBehaviour, IPointerDownHandler
             }
             else
             {
+                MessageBox.Instance.ShowMessage("Can't afford building!");
                 Debug.Log("Can't afford building");
             }
         }
