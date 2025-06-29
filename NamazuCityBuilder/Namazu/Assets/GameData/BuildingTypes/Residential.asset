@@ -28,4 +28,5 @@ MonoBehaviour:
   PowerNeed: 0
   Description: Raises your population. Remember to get enough food to feed everyone
     or the people will die!
-  BuildingSprite: {fileID: 158330547, guid: 2500e2e1699a8d94d98483ee8966bb76, type: 3}
+  Deconstruct: 0
+  BuildingSprite: {fileID: -21601540, guid: 910984f04f0642640a25fb30f69c832c, type: 3}

@@ -28,4 +28,5 @@ MonoBehaviour:
   PowerNeed: 0
   Description: Tranfers power to neighbouring buildings if you have at least one
     power production building.
-  BuildingSprite: {fileID: 1729823076, guid: 2500e2e1699a8d94d98483ee8966bb76, type: 3}
+  Deconstruct: 0
+  BuildingSprite: {fileID: -1639598870, guid: 910984f04f0642640a25fb30f69c832c, type: 3}

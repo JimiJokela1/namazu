@@ -25,4 +25,5 @@ MonoBehaviour:
   PowerRange: 1
   PowerNeed: 0
   Description: Produces power for neighbouring buildings.
-  BuildingSprite: {fileID: -728870316, guid: 2500e2e1699a8d94d98483ee8966bb76, type: 3}
+  Deconstruct: 0
+  BuildingSprite: {fileID: -1482782353, guid: 910984f04f0642640a25fb30f69c832c, type: 3}
