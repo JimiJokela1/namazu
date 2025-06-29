@@ -153,7 +153,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -32, y: -32}
   m_SizeDelta: {x: 1280, y: 768}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &26366112
@@ -4183,7 +4183,7 @@ MonoBehaviour:
   TilePrefabs: []
   TilesParent: {fileID: 189159853}
   TileCountY: 24
-  TileCountX: 30
+  TileCountX: 35
   OreTilePrefab: {fileID: 994365341242107474, guid: 341847022e183a448be1f3b036822eee, type: 3}
   CrystalTilePrefab: {fileID: 5250459142161185347, guid: 5bc06e383e9bb5144b52a59d49ebb38c, type: 3}
   StoneTilePrefab: {fileID: 6181769070293014514, guid: 99f282d76a4b2634dbbfa9eaf6f0efa8, type: 3}
