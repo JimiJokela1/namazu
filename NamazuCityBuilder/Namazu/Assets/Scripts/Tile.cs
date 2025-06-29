@@ -2,14 +2,26 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Tile : MonoBehaviour, IPointerDownHandler
+public class Tile : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public Building currentBuildingObject = null;
     public BuildingType TileBuilding;
     public TileType TileType;
 
+    public GameObject Grid;
+
     public Vector2Int positionOnGrid;
     public bool shuffled = false; //Used for the catfish
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        Grid.SetActive(true);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        Grid.SetActive(false);
+    }
 
     public void OnPointerDown(PointerEventData eventData)
     {
