@@ -89,6 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abb1fa8f227d015459e3f6ef8162c775, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultScreenHeight: 900
 --- !u!1 &8415149310363659246
 GameObject:
   m_ObjectHideFlags: 0
