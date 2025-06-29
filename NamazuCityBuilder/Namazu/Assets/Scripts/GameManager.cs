@@ -296,7 +296,8 @@ public class GameManager : MonoBehaviour
                         if (building.BuildingType.PopulationGain > 0)
                         {
                             // People are starving!
-                            UIManager.Instance.UpdateStarvingText(true);
+                            //UIManager.Instance.UpdateStarvingText(true);
+                            MessageBox.Instance.ShowMessage("People are starving!!!");
                         }
                         continue;
                     }
@@ -305,7 +306,7 @@ public class GameManager : MonoBehaviour
                     {
                         bool hasPower = false;
                         List<Building> neighboringBuildings = GetNeighbouringBuildings(building.Tile);
-                        Debug.Log("Neighboring buildings: " + neighboringBuildings.Count);
+                        //Debug.Log("Neighboring buildings: " + neighboringBuildings.Count);
                         if (neighboringBuildings.Count > 0)
                         {
                             foreach (Building neighBuilding in neighboringBuildings)
@@ -320,7 +321,7 @@ public class GameManager : MonoBehaviour
 
                         if (!hasPower)
                         {
-                            Debug.Log("Building doesn't have power!");
+                            //Debug.Log("Building doesn't have power!");
                             building.SetNoPowerIcon(true);
                             continue;
                         }
