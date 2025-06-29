@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Microsoft.Unity.VisualStudio.Editor;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using Image = UnityEngine.UI.Image;
 
@@ -48,7 +46,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdatePopulationText()
     {
-        PopulationText.text = "Population: " + GameManager.Instance.TotalPopulation;
+        PopulationText.text = "Population: " + GameManager.Instance.TotalPopulation + " / 200";
     }
 
     public void UpdateCostText(List<ResourceAmount> cost)

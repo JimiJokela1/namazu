@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.UI;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -17,6 +18,8 @@ public class GameManager : MonoBehaviour
     public Tile[,] Tiles;
     public int TileCountY;
     public int TileCountX;
+
+    public GameObject VictoryMessage;
 
     public GameObject OreTilePrefab;
     public GameObject CrystalTilePrefab;
@@ -286,6 +289,14 @@ public class GameManager : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(0.1f);
+
+            if (TotalPopulation >= 200)
+            {
+                // Victory
+                VictoryMessage.SetActive(true);
+
+                yield break;
+            }
 
             foreach (var building in BuiltBuildings)
             {
