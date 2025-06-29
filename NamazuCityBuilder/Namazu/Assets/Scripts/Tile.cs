@@ -64,7 +64,7 @@ public class Tile : MonoBehaviour, IPointerDownHandler
         building.GetComponentInChildren<Image>().sprite = TileBuilding.BuildingSprite;
         currentBuildingObject.Tile = this;
 
-        AudioSource.PlayClipAtPoint(GameManager.Instance.BuildAudio, Vector3.zero, 0.5f);
+        AudioSource.PlayClipAtPoint(GameManager.Instance.BuildAudio, Vector3.zero, 0.3f);
 
         GameManager.Instance.TotalPopulation += TileBuilding.PopulationGain;
     }
@@ -77,7 +77,7 @@ public class Tile : MonoBehaviour, IPointerDownHandler
 
         GameManager.Instance.TotalPopulation -= TileBuilding.PopulationGain;
 
-        AudioSource.PlayClipAtPoint(GameManager.Instance.DestroyAudio, Vector3.zero);
+        AudioSource.PlayClipAtPoint(GameManager.Instance.DestroyAudio, Vector3.zero, 0.3f);
     }
 
     public void DeconstructBuilding()
