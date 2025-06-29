@@ -15,10 +15,10 @@ public class Tile : MonoBehaviour, IPointerDownHandler
     {
         if (TileBuilding != null)
         {
-            print("aksfhnoainfoasncfosa");
+            //print("aksfhnoainfoasncfosa");
             if (GameManager.Instance.SelectedBuildingType.Deconstruct)
             {
-                print("aksfhnoainfoasncfosa");
+                //print("aksfhnoainfoasncfosa");
                 DeconstructBuilding();
             }
             return;

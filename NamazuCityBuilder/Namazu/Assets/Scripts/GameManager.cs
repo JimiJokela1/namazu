@@ -375,6 +375,7 @@ public class GameManager : MonoBehaviour
         SelectedBuildingType = BuildingTypes.Find(b => b.name == "OreMine");
         UIManager.Instance.UpdateCostText(SelectedBuildingType.BuildingCosts);
         AudioSource.PlayClipAtPoint(ButtonAudio, Vector3.zero, 0.3f);
+        UIManager.Instance.UpdateDescriptionText(SelectedBuildingType.Description);
     }
 
     public void SelectStoneMine()
@@ -382,6 +383,7 @@ public class GameManager : MonoBehaviour
         SelectedBuildingType = BuildingTypes.Find(b => b.name == "StoneMine");
         UIManager.Instance.UpdateCostText(SelectedBuildingType.BuildingCosts);
         AudioSource.PlayClipAtPoint(ButtonAudio, Vector3.zero, 0.3f);
+        UIManager.Instance.UpdateDescriptionText(SelectedBuildingType.Description);
     }
 
     public void SelectCrystalMine()
@@ -389,6 +391,7 @@ public class GameManager : MonoBehaviour
         SelectedBuildingType = BuildingTypes.Find(b => b.name == "CrystalMine");
         UIManager.Instance.UpdateCostText(SelectedBuildingType.BuildingCosts);
         AudioSource.PlayClipAtPoint(ButtonAudio, Vector3.zero, 0.3f);
+        UIManager.Instance.UpdateDescriptionText(SelectedBuildingType.Description);
     }
 
     public void SelectFactory()
@@ -396,6 +399,7 @@ public class GameManager : MonoBehaviour
         SelectedBuildingType = BuildingTypes.Find(b => b.name == "Factory");
         UIManager.Instance.UpdateCostText(SelectedBuildingType.BuildingCosts);
         AudioSource.PlayClipAtPoint(ButtonAudio, Vector3.zero, 0.3f);
+        UIManager.Instance.UpdateDescriptionText(SelectedBuildingType.Description);
     }
 
     public void SelectFarm()
@@ -403,6 +407,7 @@ public class GameManager : MonoBehaviour
         SelectedBuildingType = BuildingTypes.Find(b => b.name == "Farm");
         UIManager.Instance.UpdateCostText(SelectedBuildingType.BuildingCosts);
         AudioSource.PlayClipAtPoint(ButtonAudio, Vector3.zero, 0.3f);
+        UIManager.Instance.UpdateDescriptionText(SelectedBuildingType.Description);
     }
 
     public void SelectResidential()
@@ -410,6 +415,7 @@ public class GameManager : MonoBehaviour
         SelectedBuildingType = BuildingTypes.Find(b => b.name == "Residential");
         UIManager.Instance.UpdateCostText(SelectedBuildingType.BuildingCosts);
         AudioSource.PlayClipAtPoint(ButtonAudio, Vector3.zero, 0.3f);
+        UIManager.Instance.UpdateDescriptionText(SelectedBuildingType.Description);
     }
 
     public void SelectPowerProduction()
@@ -417,6 +423,7 @@ public class GameManager : MonoBehaviour
         SelectedBuildingType = BuildingTypes.Find(b => b.name == "PowerProduction");
         UIManager.Instance.UpdateCostText(SelectedBuildingType.BuildingCosts);
         AudioSource.PlayClipAtPoint(ButtonAudio, Vector3.zero, 0.3f);
+        UIManager.Instance.UpdateDescriptionText(SelectedBuildingType.Description);
     }
 
     public void SelectPowerPylon()
@@ -424,6 +431,7 @@ public class GameManager : MonoBehaviour
         SelectedBuildingType = BuildingTypes.Find(b => b.name == "PowerPylon");
         UIManager.Instance.UpdateCostText(SelectedBuildingType.BuildingCosts);
         AudioSource.PlayClipAtPoint(ButtonAudio, Vector3.zero, 0.3f);
+        UIManager.Instance.UpdateDescriptionText(SelectedBuildingType.Description);
     }
 
     public void SelectDeconstruct()
@@ -431,6 +439,7 @@ public class GameManager : MonoBehaviour
         SelectedBuildingType = BuildingTypes.Find(b => b.name == "Demolisher");
         UIManager.Instance.UpdateCostText(SelectedBuildingType.BuildingCosts);
         AudioSource.PlayClipAtPoint(ButtonAudio, Vector3.zero, 0.3f);
+        UIManager.Instance.UpdateDescriptionText(SelectedBuildingType.Description);
     }
 
     public List<Building> GetNeighbouringBuildings(Tile tile)

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Unity.VisualStudio.Editor;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using Image = UnityEngine.UI.Image;
 
@@ -15,6 +16,7 @@ public class UIManager : MonoBehaviour
     public GameObject CostPrefab;
     public TextMeshProUGUI PopulationText;
     public TextMeshProUGUI StarvingText;
+    public TextMeshProUGUI DescriptionText;
 
     public Sprite CrystalIcon;
     public Sprite OreIcon;
@@ -95,5 +97,10 @@ public class UIManager : MonoBehaviour
         {
             StarvingText.text = "";
         }
+    }
+
+    public void UpdateDescriptionText(string text)
+    {
+        DescriptionText.text = "Description: " + text;
     }
 }
