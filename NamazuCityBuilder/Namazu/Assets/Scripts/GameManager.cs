@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance = null;
 
+    public static bool randomized = false;
+
     public BuildingType SelectedBuildingType;
     public Transform BuildingsParent;
     public List<BuildingType> BuildingTypes;
@@ -90,7 +92,14 @@ public class GameManager : MonoBehaviour
 
         UIManager.Instance.UpdateResourceTexts(PlayerResources);
 
-        GeneratePremadeLevelTiles();
+        if (randomized)
+        {
+            GenerateRandomMapTiles();
+        }
+        else
+        {
+            GeneratePremadeLevelTiles();
+        }
 
         StartCoroutine(TickLogic());
     }
